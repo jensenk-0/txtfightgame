@@ -1,3 +1,5 @@
+# makes classes of player and enemy
+
 class Player:
     def __init__(self, health, attack, defense, special_meter):
         self.health = health

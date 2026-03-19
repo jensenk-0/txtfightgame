@@ -1,18 +1,18 @@
-import random
-from classes import Player, Enemy
-
-
-player = Player(10, 10, 5, 5)
-enemy = Enemy(10, 10, 5, 5)
+from turns import player_turn, enemy_turn, player, enemy
 
 
 def main_game(turns):
     for turn in range(1, turns+1):
-        player_input = input(f"turn {turn}\nenemy has {enemy.health} health left, what do you do?\n")
-        if player_input == "attack":
-            dmg = random.randint(1, player.attack) - random.randint(1, enemy.defense)
-            enemy.health -= dmg
-            print(f"you did {dmg} damage to enemy")
+        if player.health <= 0:
+            print(f"the player has died!, player has {player.health} health left")
+            print("GAME OVER!")
+            break
+        player_turn(turn)
+        if enemy.health <= 0:
+            print(f"the enemy was defeated!, enemy has {enemy.health} left")
+            print("YOU WIN")
+            break
+        enemy_turn()
 
 main_game(5)
 
