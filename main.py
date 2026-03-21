@@ -1,3 +1,5 @@
+# runs the main game 
+
 from turns import player_turn, enemy_turn, player, enemy
 
 
@@ -12,7 +14,7 @@ def choice_of_turns():
 def main_game(turns):
     for turn in range(1, turns+1):
         if player.health <= 0:
-            print(f"the player has died!, player has {player.health} health left")
+            print(f"the player has died!, player has {player.health} health left\n")
             print("GAME OVER!")
             break
 
@@ -24,16 +26,18 @@ def main_game(turns):
 
 
         if enemy.health <= 0:
-            print(f"the enemy was defeated!, enemy has {enemy.health} health left")
+            print(f"the enemy was defeated!, enemy has {enemy.health} health left\n")
             print("YOU WIN")
             break
 
-        enemy_turn()
+        enemy_turn(turn)
 
     if player.health > 0 and enemy.health > 0:
         print(f"It is a tie!\nplayer had {player.health} health remaining\nenemy had {enemy.health} health remaining")
-        
+
+
 try:
+
     amount_of_turns = choice_of_turns()
 
 except ValueError:
