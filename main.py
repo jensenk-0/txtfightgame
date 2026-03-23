@@ -7,10 +7,7 @@ def choice_of_turns():
     choice = input("How many turns do you want to play with: ")
     number = int(choice)
     return number
-    
-    
-
-
+        
 def main_game(turns):
     for turn in range(1, turns+1):
         if player.health <= 0:
