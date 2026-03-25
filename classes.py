@@ -9,6 +9,7 @@ class Player:
         self.defending = defending
         self.special_meter = special_meter
         self.max_hp = max_hp
+        self.name = "player"
 
     
 class Enemy:
@@ -19,14 +20,22 @@ class Enemy:
         self.defending = defending
         self.special_meter = special_meter
         self.max_hp = max_hp
+        self.name = "enemy"
 
 
-
-def dmg_cal(attacker, defender):
+def attack(attacker, defender):
     dmg = random.randint(1, attacker.attack) - random.randint(1, defender.defense)
 
     if dmg < 0:
         dmg = 0
+    
+    defender.health -= dmg
+
+    print(f"{attacker.name} attacks\n")
+
+    print(f"{attacker.name} did {dmg} to {defender.name}\n")
+    
+    special(attacker, defender, dmg)
 
     return dmg
 
@@ -34,6 +43,7 @@ def dmg_cal(attacker, defender):
 def defending(defender):
     defender.defense *= 2
     defender.defending = True
+    print(f"{defender.name} protected itself, defense doubled!\n")
 
 
 def special(attacker, defender, damage):
@@ -49,6 +59,7 @@ def special(attacker, defender, damage):
 
     if defender.special_meter > 100:
         defender.special_meter = 100
+    
     
 
 
