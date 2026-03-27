@@ -1,5 +1,5 @@
 # makes classes of player and enemy and stores calculations for game
-import random
+import random, math
 
 class Player:
     def __init__(self, health, attack, defense, defending, special_meter, max_hp):
@@ -59,6 +59,20 @@ def special(attacker, defender, damage):
 
     if defender.special_meter > 100:
         defender.special_meter = 100
+
+def heal(healer):
+        
+    percent = healer.special_meter / 100
+    healed = (healer.max_hp * percent) // 2
+    
+    healer.special_meter = 0
+
+    healer.health += math.floor(healed)
+
+    if healer.health > healer.max_hp:
+        healer.health = healer.max_hp
+
+    print(f"{healer.name} healed himself {healed}")
     
     
 

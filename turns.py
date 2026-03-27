@@ -1,6 +1,7 @@
 # holds player and enemy inputs and stats and holds the functions of player and enemy turns
 import random
-from classes import Player, Enemy, attack, defending, special
+from classes import Player, Enemy, attack, defending, heal
+
 
 #classes
 player = Player(10, 10, 5, False, 0.0, 10)
@@ -17,13 +18,16 @@ def player_turn(turn):
         player.defending = False
 
 
-    player_input = input(f"\nturn {turn}\nplayer has {player.health} health left and enemy has {enemy.health} health left\n\nspecial meter at {player.special_meter}%\n\nwhat do you do?\n\nattack\n\ndefend\n\nsurrender\n\n: ")
+    player_input = input(f"\nturn {turn}\nplayer has {player.health} health left and enemy has {enemy.health} health left\n\nspecial meter at {player.special_meter}%\n\nwhat do you do?\n\nattack\n\ndefend\n\nsurrender\n\nheal\n\n: ")
     
     if player_input == "attack":
         attack(player, enemy)
         
     elif player_input == "defend":
         defending(player)
+
+    elif player_input == "heal":
+        heal(player)
         
     elif player_input == "surrender":
         player.health = 0
@@ -44,7 +48,7 @@ def enemy_turn(turn):
     
     print(f"enemy's turn, special meter for enemy is {enemy.special_meter}%")
 
-    enemy_choice = random.randint(1, 2)
+    enemy_choice = random.randint(1, 3)
 
     if enemy_choice == 1 or turn == 1 or enemy.health == enemy.max_hp:
         attack(enemy, player)
@@ -52,7 +56,8 @@ def enemy_turn(turn):
     elif enemy_choice == 2:
         defending(enemy)
         
-        
+    elif enemy_choice == 3 and enemy.special_meter > 0 and enemy.health < enemy.max_hp:
+        heal(enemy)
 
 
 
