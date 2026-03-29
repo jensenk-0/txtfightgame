@@ -56,8 +56,15 @@ def enemy_turn(turn):
     elif enemy_choice == 2:
         defending(enemy)
         
-    elif enemy_choice == 3 and enemy.special_meter > 0 and enemy.health < enemy.max_hp:
-        heal(enemy)
+    elif enemy_choice == 3:
+        
+        if enemy.special_meter == 0:
+            attack(enemy, player)
+
+        else:
+            heal(enemy)
+
+        
 
 
 
