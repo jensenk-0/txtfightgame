@@ -42,7 +42,7 @@ def enemy_turn(turn):
         enemy.defense //= 2
         enemy.defending = False
     
-    print(f"enemy's turn, special meter for enemy is {enemy.special_meter}%")
+    print(f"enemy's turn, special meter for enemy is {enemy.special_meter}%\n")
 
     enemy_choice = random.randint(1, 2)
 

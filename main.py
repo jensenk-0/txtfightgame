@@ -10,6 +10,8 @@ def choice_of_turns():
         
 def main_game(turns):
     for turn in range(1, turns+1):
+        
+        
         if player.health <= 0:
             print(f"the player has died!, player has {player.health} health left\n")
             print("GAME OVER!")
@@ -18,8 +20,8 @@ def main_game(turns):
         try:
             player_turn(turn)
         except Exception as err:
-            print(err)
-            continue
+            print(f"{err}\n")
+            
 
 
         if enemy.health <= 0:
@@ -37,11 +39,13 @@ try:
 
     amount_of_turns = choice_of_turns()
 
+    main_game(amount_of_turns)
+
 except ValueError:
     print("invalid input, please type in a interger (ex: 3, 15, 62)")
     
 
-main_game(amount_of_turns)
+
 
 
 
