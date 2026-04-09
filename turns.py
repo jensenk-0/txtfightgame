@@ -2,13 +2,27 @@
 import random
 from classes import Player, Enemy, attack, defending, special
 
+
 #classes
-player = Player(10, 10, 5, False, 0.0, 10)
+
+mage = Player(10, 20, 5, False, 0.0, 10)
+rogue = Player(15, 15, 10, False, 0.0, 15)
+tank = Player(20, 10, 15, False, 0.0, 20)
+    
+def choose_character():
+    player_choice = input("choose character: rogue, tank, mage\n:")
+    if player_choice == "rogue":
+        return rogue
+    elif player_choice == "tank":
+        return tank
+    elif player_choice == "mage":
+        return mage
+    else:
+        raise ValueError
+
+player = choose_character()
+
 enemy = Enemy(10, 10, 5, False, 0.0, 10)
-
-
-
-
 
 def player_turn(turn):
     

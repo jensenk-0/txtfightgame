@@ -1,7 +1,6 @@
 # runs the main game 
 
-from turns import player_turn, enemy_turn, player, enemy
-
+from turns import player_turn, enemy_turn, enemy, player
 
 def choice_of_turns():
     choice = input("How many turns do you want to play with: ")
@@ -36,13 +35,12 @@ def main_game(turns):
 
 
 try:
-
     amount_of_turns = choice_of_turns()
 
     main_game(amount_of_turns)
 
 except ValueError:
-    print("invalid input, please type in a interger (ex: 3, 15, 62)")
+    print("invalid input")
     
 
 
