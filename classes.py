@@ -1,5 +1,5 @@
 # makes classes of player and enemy and stores calculations for game
-import random
+import random, math
 
 class Player:
     def __init__(self, health, attack, defense, defending, special_meter, max_hp):
@@ -59,7 +59,22 @@ def special(attacker, defender, damage):
 
     if defender.special_meter > 100:
         defender.special_meter = 100
+
+def special_attack(attacker, defender):
+    if attacker.special_meter < 100:
+        raise Exception("not enough special power")
     
+    special_dmg = attacker.attack - random.randint(1, defender.defense)
+    
+    if special_dmg < 0:
+        special_dmg = 0
+
+    defender.health -= special_dmg
+
+    attacker.special_meter = 0.0
+
+    print("f{attacker.name} used a special attack!\n")
+    print(f"{defender.name} took {special_dmg}")
     
 
 
