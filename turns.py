@@ -74,12 +74,17 @@ def enemy_turn(turn):
     
     print(f"enemy's turn, special meter for enemy is {enemy.special_meter}%\n")
 
-    enemy_choice = random.randint(1, 3)
+    enemy_choice = random.randint(1, 2)
 
     if enemy_choice == 1 or turn == 1 or enemy.health == enemy.max_hp:
+        
+        if enemy.special_meter == 100:
+            special_attack(enemy, player)
         attack(enemy, player)
 
     elif enemy_choice == 2:
         defending(enemy)
+    
+    
 
         
