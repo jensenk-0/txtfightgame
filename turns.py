@@ -1,13 +1,13 @@
 # holds player and enemy inputs and stats and holds the functions of player and enemy turns
 import random
-from classes import Player, Enemy, attack, defending, special_attack
+from classes import Player, Enemy, attack, defending, special_attack, def_reset
 
 
 #classes
 
-mage = Player(10, 20, 5, False, 0.0, 10)
-rogue = Player(15, 15, 10, False, 0.0, 15)
-tank = Player(20, 10, 15, False, 0.0, 20)
+mage = Player(10, 20, 5, 0.0, 10)
+rogue = Player(15, 15, 10, 0.0, 15)
+tank = Player(20, 10, 15, 0.0, 20)
     
 def choose_character():
     player_choice = input("choose character: rogue, tank, mage\n:")
@@ -25,13 +25,13 @@ player = choose_character()
 def difficulty():
     player_choice = input("choose difficulty: easy, normal, hard, boss fight\n:")
     if player_choice == "easy":
-        return Enemy(10, 5, 5, False, 0.0, 10)
+        return Enemy(10, 5, 5, 0.0, 10)
     elif player_choice == "normal":
-        return Enemy(15, 10, 10, False, 0.0, 15)
+        return Enemy(15, 10, 10, 0.0, 15)
     elif player_choice == "hard":
-        return Enemy(20, 15, 15, False, 0.0, 20)
+        return Enemy(20, 15, 15, 0.0, 20)
     elif player_choice == "boss fight":
-        return Enemy(50, 10, 10, False, 100.0, 25)
+        return Enemy(50, 10, 10, 100.0, 25)
     else:
         raise Exception("invalid input")
 
@@ -39,10 +39,7 @@ enemy = difficulty()
 
 def player_turn(turn):
     
-    if player.defending:
-        player.defense //= 2
-        player.defending = False
-
+    def_reset(player)
 
     player_input = input(f"\nturn {turn}\nplayer has {player.health} health left and enemy has {enemy.health} health left\n\nspecial meter at {player.special_meter}%\n\nwhat do you do?\n\nattack\n\ndefend\n\nspecial attack\n\nsurrender\n\n: ")
     
@@ -67,11 +64,9 @@ def player_turn(turn):
 
 
 def enemy_turn(turn):
-
-    if enemy.defending:
-        enemy.defense //= 2
-        enemy.defending = False
     
+    def_reset(enemy)
+
     print(f"enemy's turn, special meter for enemy is {enemy.special_meter}%\n")
 
     enemy_choice = random.randint(1, 2)

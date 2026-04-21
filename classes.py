@@ -2,26 +2,24 @@
 import random, math
 
 class Player:
-    def __init__(self, health, attack, defense, defending, special_meter, max_hp):
+    def __init__(self, health, attack, defense, special_meter, max_hp):
         self.health = health
         self.attack = attack
         self.defense = defense
-        self.defending = defending
         self.special_meter = special_meter
         self.max_hp = max_hp
         self.name = "player"
-
+        self.defending = False
     
 class Enemy:
-    def __init__(self, health, attack, defense, defending, special_meter, max_hp):
+    def __init__(self, health, attack, defense, special_meter, max_hp):
         self.health = health
         self.attack = attack
         self.defense = defense
-        self.defending = defending
         self.special_meter = special_meter
         self.max_hp = max_hp
         self.name = "enemy"
-
+        self.defending = False
 
 def attack(attacker, defender):
     dmg = random.randint(1, attacker.attack) - random.randint(1, defender.defense)
@@ -44,6 +42,12 @@ def defending(defender):
     defender.defense *= 2
     defender.defending = True
     print(f"{defender.name} protected itself, defense doubled!\n")
+    
+def def_reset(defender):
+    if defender.defending:
+        defender.defense //= 2
+        defender.defending = False
+
 
 
 def special(attacker, defender, damage):
@@ -73,8 +77,8 @@ def special_attack(attacker, defender):
 
     attacker.special_meter = 0.0
 
-    print("f{attacker.name} used a special attack!\n")
-    print(f"{defender.name} took {special_dmg}")
+    print(f"{attacker.name} used a special attack!\n")
+    print(f"{defender.name} took {special_dmg} damage")
     
 
 
