@@ -22,7 +22,20 @@ def choose_character():
 
 player = choose_character()
 
-enemy = Enemy(10, 10, 5, False, 0.0, 10)
+def difficulty():
+    player_choice = input("choose difficulty: easy, normal, hard, boss fight\n:")
+    if player_choice == "easy":
+        return Enemy(10, 5, 5, False, 0.0, 10)
+    elif player_choice == "normal":
+        return Enemy(15, 10, 10, False, 0.0, 15)
+    elif player_choice == "hard":
+        return Enemy(20, 15, 15, False, 0.0, 20)
+    elif player_choice == "boss fight":
+        return Enemy(50, 10, 10, False, 100.0, 25)
+    else:
+        raise Exception("invalid input")
+
+enemy = difficulty()
 
 def player_turn(turn):
     
@@ -68,16 +81,5 @@ def enemy_turn(turn):
 
     elif enemy_choice == 2:
         defending(enemy)
-    
-    elif enemy_choice == 3:
-        if enemy.special_meter == 100:
-            special_attack(enemy, player)
-        else:
-            attack(enemy, player)
+
         
-
-
-
-
-
-
