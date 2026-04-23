@@ -5,9 +5,9 @@ from classes import Player, Enemy, attack, defending, special_attack, def_reset
 
 #classes
 
-mage = Player(10, 20, 5, 0.0, 10)
-rogue = Player(15, 15, 10, 0.0, 15)
-tank = Player(20, 10, 15, 0.0, 20)
+mage = Player(10, 15, 5, 0.0, 10)
+rogue = Player(15, 10, 10, 0.0, 15)
+tank = Player(20, 5, 15, 0.0, 20)
     
 def choose_character():
     player_choice = input("choose character: rogue, tank, mage\n:")
@@ -75,7 +75,8 @@ def enemy_turn(turn):
         
         if enemy.special_meter == 100:
             special_attack(enemy, player)
-        attack(enemy, player)
+        else:
+            attack(enemy, player)
 
     elif enemy_choice == 2:
         defending(enemy)

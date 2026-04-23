@@ -22,14 +22,19 @@ class Enemy:
         self.defending = False
 
 def attack(attacker, defender):
-    dmg = random.randint(1, attacker.attack) - random.randint(1, defender.defense)
+    
+    print(f"{attacker.name} attacks\n")
+    
+    if defender.defending:
+        print(f"{defender.name} was defending!, damage reduced")
+        dmg = random.randint(1, attacker.attack) - random.randint(1, defender.defense)
+    else:
+        dmg = random.randint(1, attacker.attack)
 
     if dmg < 0:
         dmg = 0
     
     defender.health -= dmg
-
-    print(f"{attacker.name} attacks\n")
 
     print(f"{attacker.name} did {dmg} to {defender.name}\n")
     
@@ -39,13 +44,11 @@ def attack(attacker, defender):
 
 
 def defending(defender):
-    defender.defense *= 2
     defender.defending = True
     print(f"{defender.name} protected itself, defense doubled!\n")
     
 def def_reset(defender):
     if defender.defending:
-        defender.defense //= 2
         defender.defending = False
 
 
@@ -65,20 +68,33 @@ def special(attacker, defender, damage):
         defender.special_meter = 100
 
 def special_attack(attacker, defender):
+
+    print(f"{attacker.name} used a special attack!\n")
+    
+
     if attacker.special_meter < 100:
         raise Exception("not enough special power")
     
-    special_dmg = attacker.attack - random.randint(1, defender.defense)
+    if defender.defending:
+        print(f"{defender.name} was defending!, damage reduced")
+        special_dmg = attacker.attack - random.randint(1, defender.defense)
     
+    else:
+        special_dmg = attacker.attack
+
     if special_dmg < 0:
         special_dmg = 0
+
+    print(f"{defender.name} took {special_dmg} damage from attack!")
 
     defender.health -= special_dmg
 
     attacker.special_meter = 0.0
 
-    print(f"{attacker.name} used a special attack!\n")
-    print(f"{defender.name} took {special_dmg} damage")
+    
+
+
+
     
 
 
