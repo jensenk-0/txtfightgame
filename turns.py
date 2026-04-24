@@ -1,13 +1,13 @@
 # holds player and enemy inputs and stats and holds the functions of player and enemy turns
 import random
-from classes import Player, Enemy, attack, defending, special_attack, def_reset
+from classes import Mage, Tank, Rogue, Enemy, attack, defending, special_attack, def_reset, ability
 
 
 #classes
 
-mage = Player(10, 15, 5, 0.0, "mage", 10)
-rogue = Player(15, 10, 10, 0.0, "rogue", 15)
-tank = Player(20, 5, 15, 0.0, "tank", 20)
+mage = Mage(10, 15, 5, 0.0, "mage", 10)
+rogue = Rogue(15, 10, 10, 0.0, "rogue", 15)
+tank = Tank(20, 5, 15, 0.0, "tank", 20)
     
 def choose_character():
     player_choice = input("choose character: rogue, tank, mage\n:")
@@ -41,7 +41,7 @@ def player_turn(turn):
     
     def_reset(player)
 
-    player_input = input(f"\nturn {turn}\n{player.name} has {player.health} health left and {enemy.name} has {enemy.health} health left\n\nspecial meter at {player.special_meter}%\n\nwhat do you do?\n\nattack\n\ndefend\n\nspecial attack\n\nsurrender\n\n: ")
+    player_input = input(f"\nturn {turn}\n{player.name} has {player.health} health left and {enemy.name} has {enemy.health} health left\n\nspecial meter at {player.special_meter}%\n\nwhat do you do?\n\nattack\n\ndefend\n\nability\n\nsurrender\n\n: ")
     
     if player_input == "attack":
         attack(player, enemy)
@@ -49,8 +49,8 @@ def player_turn(turn):
     elif player_input == "defend":
         defending(player)
 
-    elif player_input == "special":
-        special_attack(player, enemy)
+    elif player_input == "ability":
+        ability(player, enemy)
         
     elif player_input == "surrender":
         player.health = 0
