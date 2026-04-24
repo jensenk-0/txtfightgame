@@ -1,25 +1,25 @@
 # makes classes of player and enemy and stores calculations for game
-import random, math
+import random
 
 class Player:
-    def __init__(self, health, attack, defense, special_meter, max_hp):
+    def __init__(self, health, attack, defense, special_meter, name, max_hp):
         self.health = health
         self.attack = attack
         self.defense = defense
         self.special_meter = special_meter
-        self.max_hp = max_hp
-        self.name = "player"
+        self.name = name
         self.defending = False
+        self.max_hp = max_hp
     
 class Enemy:
-    def __init__(self, health, attack, defense, special_meter, max_hp):
+    def __init__(self, health, attack, defense, special_meter, name, max_hp):
         self.health = health
         self.attack = attack
         self.defense = defense
         self.special_meter = special_meter
-        self.max_hp = max_hp
-        self.name = "enemy"
+        self.name = name
         self.defending = False
+        self.max_hp = max_hp
 
 def attack(attacker, defender):
     
@@ -45,7 +45,7 @@ def attack(attacker, defender):
 
 def defending(defender):
     defender.defending = True
-    print(f"{defender.name} protected itself, defense doubled!\n")
+    print(f"{defender.name} protected itself!\n")
     
 def def_reset(defender):
     if defender.defending:
@@ -85,7 +85,7 @@ def special_attack(attacker, defender):
     if special_dmg < 0:
         special_dmg = 0
 
-    print(f"{defender.name} took {special_dmg} damage from attack!")
+    print(f"{defender.name} took {special_dmg} damage from {attacker.name} attack!")
 
     defender.health -= special_dmg
 

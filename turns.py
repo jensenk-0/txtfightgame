@@ -5,9 +5,9 @@ from classes import Player, Enemy, attack, defending, special_attack, def_reset
 
 #classes
 
-mage = Player(10, 15, 5, 0.0, 10)
-rogue = Player(15, 10, 10, 0.0, 15)
-tank = Player(20, 5, 15, 0.0, 20)
+mage = Player(10, 15, 5, 0.0, "mage", 10)
+rogue = Player(15, 10, 10, 0.0, "rogue", 15)
+tank = Player(20, 5, 15, 0.0, "tank", 20)
     
 def choose_character():
     player_choice = input("choose character: rogue, tank, mage\n:")
@@ -25,13 +25,13 @@ player = choose_character()
 def difficulty():
     player_choice = input("choose difficulty: easy, normal, hard, boss fight\n:")
     if player_choice == "easy":
-        return Enemy(10, 5, 5, 0.0, 10)
+        return Enemy(10, 5, 5, 0.0, "grunt", 10)
     elif player_choice == "normal":
-        return Enemy(15, 10, 10, 0.0, 15)
+        return Enemy(15, 10, 10, 0.0, "evil knight", 15)
     elif player_choice == "hard":
-        return Enemy(20, 15, 15, 0.0, 20)
+        return Enemy(20, 15, 15, 0.0, "warmonger", 20)
     elif player_choice == "boss fight":
-        return Enemy(50, 10, 10, 100.0, 25)
+        return Enemy(50, 10, 10, 100.0, "boss", 50)
     else:
         raise Exception("invalid input")
 
@@ -41,7 +41,7 @@ def player_turn(turn):
     
     def_reset(player)
 
-    player_input = input(f"\nturn {turn}\nplayer has {player.health} health left and enemy has {enemy.health} health left\n\nspecial meter at {player.special_meter}%\n\nwhat do you do?\n\nattack\n\ndefend\n\nspecial attack\n\nsurrender\n\n: ")
+    player_input = input(f"\nturn {turn}\n{player.name} has {player.health} health left and {enemy.name} has {enemy.health} health left\n\nspecial meter at {player.special_meter}%\n\nwhat do you do?\n\nattack\n\ndefend\n\nspecial attack\n\nsurrender\n\n: ")
     
     if player_input == "attack":
         attack(player, enemy)
