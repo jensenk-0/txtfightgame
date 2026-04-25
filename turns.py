@@ -1,13 +1,13 @@
 # holds player and enemy inputs and stats and holds the functions of player and enemy turns
 import random
-from classes import Mage, Tank, Rogue, Enemy, attack, defending, special_attack, def_reset, ability
+from classes import Mage, Tank, Rogue, Enemy, Boss, attack, defending, special_attack, def_reset, ability
 
 
 #classes
 
-mage = Mage(10, 16, 5, 0, "mage", 10)
-rogue = Rogue(15, 12, 10, 0, "rogue", 15)
-tank = Tank(20, 8, 15, 0, "tank", 20)
+mage = Mage(10, 16, 8, 0, "mage", 10)
+rogue = Rogue(15, 12, 12, 0, "rogue", 15)
+tank = Tank(20, 8, 16, 0, "tank", 20)
     
 def choose_character():
     player_choice = input("choose character: rogue, tank, mage\n:")
@@ -25,13 +25,13 @@ player = choose_character()
 def difficulty():
     player_choice = input("choose difficulty: easy, normal, hard, boss fight\n:")
     if player_choice == "easy":
-        return Enemy(10, 5, 5, 0, "grunt", 10)
+        return Enemy(10, 8, 8, 0, "grunt", 10)
     elif player_choice == "normal":
-        return Enemy(15, 10, 10, 0, "evil knight", 15)
+        return Enemy(15, 12, 12, 0, "evil knight", 15)
     elif player_choice == "hard":
-        return Enemy(20, 15, 15, 0, "warmonger", 20)
+        return Enemy(20, 16, 16, 0, "warmonger", 20)
     elif player_choice == "boss fight":
-        return Enemy(50, 10, 10, 100, "boss", 50)
+        return Boss(50, 15, 10, 0, "dragon", 50)
     else:
         raise Exception("invalid input")
 
@@ -74,7 +74,7 @@ def enemy_turn(turn):
     if enemy_choice == 1 or turn == 1 or enemy.health == enemy.max_hp:
         
         if enemy.special_meter == 100:
-            special_attack(enemy, player)
+            ability(enemy, player)
         else:
             attack(enemy, player)
 

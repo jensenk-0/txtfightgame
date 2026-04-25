@@ -18,7 +18,7 @@ class Player(Entity):
 class Mage(Player):
     def __init__(self, health, attack, defense, special_meter, name, max_hp):
         super().__init__(health, attack, defense, special_meter, name, max_hp)
-        self.ability = "magic attack"
+        self.ability = "magic bolts"
 
 class Tank(Player):
     def __init__(self, health, attack, defense, special_meter, name, max_hp):
@@ -34,7 +34,12 @@ class Rogue(Player):
 class Enemy(Entity):
     def __init__(self, health, attack, defense, special_meter, name, max_hp):
         super().__init__(health, attack, defense, special_meter, name, max_hp)
+        
 
+class Boss(Enemy):
+    def __init__(self, health, attack, defense, special_meter, name, max_hp):
+        super().__init__(health, attack, defense, special_meter, name, max_hp)
+        self.ability = "dragon's roar"
 
 
 
@@ -115,36 +120,39 @@ def ability(attacker, defender):
     
     print(f"{attacker.name} used {attacker.ability}")
 
-    if attacker.ability == "magic attack":
-        special_attack(attacker, defender)
-
+    if attacker.ability == "magic bolts":
+        total_attacks = random.randint(2, 3)
+        print(f"{attacker.name} shoots {total_attacks} bolts!\n")
+        total_dmg = 0
+        for i in range(0, (total_attacks)):
+            total_dmg += attack(attacker, defender)
+        print(f"{attacker.name} did {total_dmg} total damage to {defender.name}!\n")
+        
     elif attacker.ability == "healing aura":
         amount_healed = attacker.max_hp // 2
         attacker.defending = True
         attacker.health += amount_healed
+        if attacker.health > attacker.max_hp:
+            attacker.health = attacker.max_hp
         print(f"{attacker.name} healed {amount_healed}!\n")
         
-
     elif attacker.ability == "drain":
         drained = attack(attacker, defender)
         attacker.health += drained
         defender.special_meter //= 2
         print(f"{attacker.name} healed {drained}\n{defender.name} special meter went down!")
 
+    elif attacker.ability == "dragon's roar":
+        healed = attacker.max_hp // 3
+        attacker.health += healed
+        print(f"{attacker.name}'s attack and defense went up and healed {healed} health")
+        attacker.attack += 3
+        attacker.defense += 3
+
+
+    else:
+        special_attack(attacker, defender)
+
     attacker.special_meter = 0
 
-        
-        
-
-
-
     
-
-
-
-    
-
-
-
-
-        
