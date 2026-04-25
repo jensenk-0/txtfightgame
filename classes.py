@@ -1,5 +1,5 @@
 # makes classes of player and enemy and stores calculations for game
-import random
+import random, math
 
 class Entity:
     def __init__(self, health, attack, defense, special_meter, name, max_hp):
@@ -23,7 +23,7 @@ class Mage(Player):
 class Tank(Player):
     def __init__(self, health, attack, defense, special_meter, name, max_hp):
         super().__init__(health, attack, defense, special_meter, name, max_hp)
-        self.ability = "heal"
+        self.ability = "healing aura"
 
 class Rogue(Player):
     def __init__(self, health, attack, defense, special_meter, name, max_hp):
@@ -74,8 +74,10 @@ def def_reset(defender):
 
 
 def special(attacker, defender, damage):
-    percent_attacker = (damage / attacker.max_hp) * 100
-    percent_defender = (damage / defender.max_hp) * 100
+    percent_attacker = math.ceil((damage / attacker.max_hp) * 100)
+    percent_defender = math.ceil((damage / defender.max_hp) * 100)
+
+    
 
     attacker.special_meter += percent_attacker
     defender.special_meter += percent_defender
@@ -102,30 +104,34 @@ def special_attack(attacker, defender):
 
     print(f"{defender.name} took {special_dmg} damage from {attacker.name} attack!")
     defender.health -= special_dmg
-    attacker.special_meter = 0.0
+    
+    attacker.special_meter = 0
 
     return special_dmg
 
 def ability(attacker, defender):
     if attacker.special_meter < 100:
-        raise Exception("not eoungh power")
+        raise Exception("not enough power")
     
     print(f"{attacker.name} used {attacker.ability}")
 
     if attacker.ability == "magic attack":
         special_attack(attacker, defender)
 
-    elif attacker.ability == "heal":
+    elif attacker.ability == "healing aura":
         amount_healed = attacker.max_hp // 2
+        attacker.defending = True
         attacker.health += amount_healed
         print(f"{attacker.name} healed {amount_healed}!\n")
+        
 
     elif attacker.ability == "drain":
         drained = attack(attacker, defender)
         attacker.health += drained
-        print(f"{attacker.name} healed {drained}")
+        defender.special_meter //= 2
+        print(f"{attacker.name} healed {drained}\n{defender.name} special meter went down!")
 
-    attacker.special_meter = 0.0
+    attacker.special_meter = 0
 
         
         
