@@ -34,7 +34,7 @@ class Rogue(Player):
 class Enemy(Entity):
     def __init__(self, health, attack, defense, special_meter, name, max_hp):
         super().__init__(health, attack, defense, special_meter, name, max_hp)
-        
+        self.ability = "special attack"
 
 class Boss(Enemy):
     def __init__(self, health, attack, defense, special_meter, name, max_hp):
@@ -96,8 +96,6 @@ def special(attacker, defender, damage):
 
 def special_attack(attacker, defender):
 
-    print(f"{attacker.name} used special attack!\n")
-    
     if defender.defending:
         print(f"{defender.name} was defending!, damage reduced")
         special_dmg = attacker.attack - random.randint(1, defender.defense) 
