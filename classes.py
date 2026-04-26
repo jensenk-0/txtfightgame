@@ -137,6 +137,8 @@ def ability(attacker, defender):
     elif attacker.ability == "drain":
         drained = attack(attacker, defender)
         attacker.health += drained
+        if attacker.health > attacker.max_hp:
+            attacker.health = attacker.max_hp
         defender.special_meter //= 2
         print(f"{attacker.name} healed {drained}\n{defender.name} special meter went down!")
 
@@ -144,8 +146,8 @@ def ability(attacker, defender):
         healed = attacker.max_hp // 3
         attacker.health += healed
         print(f"{attacker.name}'s attack and defense went up and healed {healed} health")
-        attacker.attack += 3
-        attacker.defense += 3
+        attacker.attack += 5
+        attacker.defense += 5
 
 
     else:

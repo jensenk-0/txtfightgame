@@ -4,4 +4,6 @@ This is basically a turn based text fighting game that was made mainly to learn 
 
 This will also count for boots.dev streak
 
+This project is consider complete and updates are somewhat unlikely due to kyle working on other projects. Thanks for playing!
+
 Hope you enjoy! :)
